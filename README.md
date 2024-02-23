@@ -24,6 +24,7 @@ En esta paso tienes dos opciones, descargar unicamente el dockerfile que esta en
     docker build -t <nombre del conedor> .
 
 4-Ejecuta el siguiente comando para iniciar el contenedor:
+
     docker run -d --name <nombre del contenedor> --network <nombre del contenedir de la red> -p 8080:80 <nombre del contendor>
 
 Listo, ahora puedes ir al navegador a visualizar si esta corriendo apache y laravel
