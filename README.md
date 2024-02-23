@@ -5,7 +5,7 @@ Este es proyecto escolar desarrollado en laravel
 
 
 Para poder empeza a realizar sus actividades, primero es necesario descargar docker.
-Ya que estara utilizando por conveniencia de todos. Para que no descargue una maquina virtual o algo por el estilo.
+Ya que se utilizara para conveniencia de todos. Para que no descarguen una maquina virtual o algo por el estilo.
 
 Los pasos estaran orientados a terminal, debera investigar como hacer todo esto si estas usando el entorno gráfico de docker
 
