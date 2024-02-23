@@ -23,7 +23,11 @@ RUN apt-get update \
 WORKDIR /var/www/html
 
 # Clona el proyecto desde GitHub
-RUN git clone https://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@github.com/Alexmm14/Laravel-docker.git proyectoSitios
+RUN git clone https://github.com/Alexmm14/Laravel-docker.git proyectoSitios
+
+#Si te manda un error de autenticación al crear el contenedor, saca un token en tu perfil de github
+#Descomenta la siguiente line y coloca tu token
+# RUN git clone https://<Aquí tu token>@github.com/Alexmm14/Laravel-docker.git proyectoSitios
 
 # Instala las dependencias de Composer y genera la clave de aplicación
 RUN cd /var/www/html/proyectoSitios/proyectoSitios \
