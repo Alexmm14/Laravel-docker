@@ -4,10 +4,10 @@
 Este es proyecto escolar desarrollado en laravel
 
 
-Para poder empeza a realizar sus actividades, primero es necesario descargar docker.
-Ya que se utilizara para conveniencia de todos. Para que no descarguen una maquina virtual o algo por el estilo.
+Para poder empezar a realizar sus actividades, primero es necesario descargar docker.
+Ya que se utilizará para conveniencia de todos. Para que no descarguen una maquina virtual o algo por el estilo.
 
-Los pasos estaran orientados a terminal, debera investigar como hacer todo esto si estas usando el entorno gráfico de docker
+Los pasos están orientados a terminal, deberá investigar como hacer todo esto si estas usando el entorno gráfico de docker
 
 Pasos para iniciar el proyecto:
 
@@ -15,18 +15,19 @@ Pasos para iniciar el proyecto:
 
 2- Crear un contenedor de red:
 
-    docker network create <nombre del contenedir de la red>
+    docker network create <nombre del contenedor de la red>
 
-En esta paso tienes dos opciones, descargar unicamente el dockerfile que esta en este repositorio o descargar todo el repositorio
+En esta paso tienes dos opciones, descargar únicamente el  la carpeta llamada docker o descargar todo el repositorio
 
-3- En la terminal te dirigues al directorio donde tenga el dockerfile y ejecutas el siguiente comando para crear el contenedor (Si sucede algun error, edita tu archivo dockerfil):
+3- En la terminal te diriges al directorio donde se tenga el dockerfile y ejecutas el siguiente comando para crear el contenedor (Si sucede algún error, edita tu archivo dockerfile):
 
-    docker build -t <nombre del conedor> .
+    docker build -t <nombre del contenedor> .
 
 4-Ejecuta el siguiente comando para iniciar el contenedor:
 
-    docker run -d --name <nombre del contenedor> --network <nombre del contenedir de la red> -p 8080:80 <nombre del contendor>
+    docker run -d --name <nombre del contenedor> --network <nombre del contenedor de la red> -p 8080:80 <nombre del contenedor>
 
 Listo, ahora puedes ir al navegador a visualizar si esta corriendo apache y laravel
 mediante tu localhost por el puerto 8080
+
 
