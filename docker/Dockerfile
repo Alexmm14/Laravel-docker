@@ -12,6 +12,7 @@ RUN apt-get update \
     && apt-get install -y apache2 libapache2-mod-php \
     && apt-get install -y php-xml \
     && apt-get install -y git \
+    && apt-get install -y php-pgsql
     && apt-get install -y systemctl\
     && apt install -y php-curl \
     && a2enmod php8.1 \
