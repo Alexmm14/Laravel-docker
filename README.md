@@ -21,9 +21,8 @@ Pasos para iniciar el proyecto:
 
 4- Te diriges a la carpeta donde clonaste el repositorio.
 
-5- En el archivo docker-compose.yml:
-
-    Debes de colocar la contraseña que le vas a poner a tu base de datos, despues en el archivo .env debes de colocar la misma contraseña donde se señala
+5- En el archivo docker-compose.yml
+Debes de colocar la contraseña que le vas a poner a tu base de datos, despues en el archivo .env debes de colocar la misma contraseña donde se señala
 
 6- Ejecutas el siguente comando:
 
