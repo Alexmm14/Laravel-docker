@@ -24,10 +24,10 @@ Pasos para iniciar el proyecto:
 5- En el archivo docker-compose.yml
     Debes de colocar la contraseña que le vas a poner a tu base de datos, despues en el archivo .env debes de colocar la misma contraseña donde se señala
 
-6- Ejecutas el siguente comando:
+6- Ejecutas el siguente comando
     docker-compose up -d
 
-7- Busca la ip del contenedor de laraver con el siguiente comando:
+7- Busca la ip del contenedor de laraver con el siguiente comando
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' laravel-container
 
 
