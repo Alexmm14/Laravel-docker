@@ -11,23 +11,27 @@ Los pasos están orientados a terminal, deberá investigar como hacer todo esto 
 
 Pasos para iniciar el proyecto:
 
-1- Descargar docker
+1- Descargar docker, en linux me pidio instalar docker compose. No se si pase en windows
 
 2- Crear un contenedor de red:
 
     docker network create <nombre del contenedor de la red>
 
-En esta paso tienes dos opciones, descargar únicamente el  la carpeta llamada docker o descargar todo el repositorio
+3- Descargar todo el repositorio en una carpeta de tu equipo
 
-3- En la terminal te diriges al directorio donde se tenga el dockerfile y ejecutas el siguiente comando para crear el contenedor (Si sucede algún error, edita tu archivo dockerfile):
+4- Te diriges a la carpeta donde clonaste el repositorio.
 
-    docker build -t <nombre del contenedor> .
+5- En el archivo docker-compose.yml
+    Debes de colocar la contraseña que le vas a poner a tu base de datos, despues en el archivo .env debes de colocar la misma contraseña donde se señala
 
-4-Ejecuta el siguiente comando para iniciar el contenedor:
+6- Ejecutas el siguente comando:
+    docker-compose up -d
 
-    docker run -d --name <nombre del contenedor> --network <nombre del contenedor de la red> -p 8080:80 <nombre del contenedor>
+7- Busca la ip del contenedor de laraver con el siguiente comando:
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' laravel-container
+
 
 Listo, ahora puedes ir al navegador a visualizar si esta corriendo apache y laravel
-mediante tu localhost por el puerto 8080
+Ingresa la ip que te salio en el navegador
 
 
