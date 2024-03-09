@@ -24,8 +24,8 @@ RUN apt-get update \
 
 # Clona el proyecto desde GitHub
 RUN  cd var/www/html \
-    &&  git clone https://github.com/Alexmm14/Laravel-docker.git 
-
+    &&  git clone https://github.com/Alexmm14/Laravel-docker.git
+    
 #Si te manda un error de autenticación al crear el contenedor, saca un token en tu perfil de github
 #Descomenta la siguiente line y coloca tu token
 # RUN git clone https://<Aquí tu token>@github.com/Alexmm14/Laravel-docker.git proyectoSitios
@@ -33,7 +33,7 @@ RUN  cd var/www/html \
 WORKDIR /var/www/html/Laravel-docker
 # Instala las dependencias de Composer y genera la clave de aplicación
 
-COPY .env /var/www/html/Laravel-docker/proyectoSitios
+COPY .envexample /var/www/html/Laravel-docker/proyectoSitios/.env
 
 RUN cd /var/www/html/Laravel-docker/proyectoSitios \
     && composer install \
@@ -47,6 +47,8 @@ COPY mi-sitio.conf /etc/apache2/sites-available
 COPY apache2.conf /etc/apache2
 
 
+
+
 #Deshabilitar el archivo default de la configuración de apache2
 RUN a2dissite 000-default.conf \
     #Das permisos al usuario de apache 2 a la configuración
@@ -56,10 +58,11 @@ RUN a2dissite 000-default.conf \
     #Aplica las configuraciones para mi-sitio
     && a2ensite mi-sitio.conf \
     && systemctl restart apache2  
+    
 # Expone el puerto 80 (o el puerto que necesites)
 EXPOSE 80
 
+
 # Comando para iniciar apache y que se mantenga abierto el contenedor
 CMD systemctl start apache2 \
-    && git pull \
     && tail -f /dev/null
