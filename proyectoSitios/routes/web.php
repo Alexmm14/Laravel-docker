@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomeController::class);
+
+Route::get('/productView', [ProductController::class, 'indexProduct']);
+
+Route::get('/productCreate', [ProductController::class, 'crateProduct']);
+
+Route::get('/productUpdate', [ProductController::class, 'updateProduct']);
+
+Route::get('/productDelete', [ProductController::class, 'delteProduct']);
+
+#Pasar ruta con un argumento
+#Si hay una ruta similar, osea que tenga el mismo nombre pero va a recibir un argumento. Primero debes colocar la ruta con el argumento
+#Route::get('/productView/{argumento}', [ProductController::class, '']);
+
+
+
