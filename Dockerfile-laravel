@@ -12,12 +12,12 @@ RUN apt-get update \
     && apt-get install -y apache2 libapache2-mod-php \
     && apt-get install -y php-xml \
     && apt-get install -y git \
-    && apt-get install -y php-pgsql
-    && apt-get install -y systemctl\
+    && apt-get install -y systemctl \
+    && apt-get install -y php-pgsql \
     && apt install -y php-curl \
     && a2enmod php8.1 \
-    && service apache2 restart \
     && apt-get clean \
+    && service apache2 restart \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -33,17 +33,19 @@ RUN  cd var/www/html \
 WORKDIR /var/www/html/Laravel-docker
 # Instala las dependencias de Composer y genera la clave de aplicación
 
+COPY .env /var/www/html/Laravel-docker/proyectoSitios
+
 RUN cd /var/www/html/Laravel-docker/proyectoSitios \
     && composer install \
     && chown -R www-data:www-data /var/www/html/Laravel-docker/proyectoSitios/storage \
     && chown -R www-data:www-data /var/www/html/Laravel-docker/proyectoSitios/bootstrap/cache \
     && cd /var/www/html/Laravel-docker/proyectoSitios/ \
-    && cp .env.example .env \
     && php artisan key:generate
 
 #Copia el archivo de configuración de apache para la aplicación laravel
 COPY mi-sitio.conf /etc/apache2/sites-available
 COPY apache2.conf /etc/apache2
+
 
 #Deshabilitar el archivo default de la configuración de apache2
 RUN a2dissite 000-default.conf \
