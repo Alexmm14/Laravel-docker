@@ -17,13 +17,20 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', HomeController::class);
 
-Route::get('/productView', [ProductController::class, 'indexProduct']);
 
-Route::get('/productCreate', [ProductController::class, 'crateProduct']);
 
-Route::get('/productUpdate', [ProductController::class, 'updateProduct']);
+#Grupo de rutas
+Route::controller(ProductController::class)->group(function(){
+    Route::get('/productView', 'indexProducts');
 
-Route::get('/productDelete', [ProductController::class, 'delteProduct']);
+    Route::get('/productCreate', 'crateProduct');
+
+    Route::get('/productUpdate', 'updateProduct');
+
+    Route::get('/productDelete', 'delteProduct');
+});
+
+
 
 #Pasar ruta con un argumento
 #Si hay una ruta similar, osea que tenga el mismo nombre pero va a recibir un argumento. Primero debes colocar la ruta con el argumento
