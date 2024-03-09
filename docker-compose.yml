@@ -7,7 +7,8 @@ services:
       dockerfile: Dockerfile-laravel
     container_name: laravel-container
     networks:
-      - mi_red
+      mi_red:
+        ipv4_address: 172.25.0.2
 
   postgres-db:
     image: postgres
@@ -15,11 +16,15 @@ services:
     environment:
       POSTGRES_DB: laravel
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: #Tu contraseña
+      POSTGRES_PASSWORD: 'Admin2023#'
     networks:
-      - mi_red
+      mi_red:
+        ipv4_address: 172.25.0.3
 
 networks:
   mi_red:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
 

@@ -61,4 +61,5 @@ EXPOSE 80
 
 # Comando para iniciar apache y que se mantenga abierto el contenedor
 CMD systemctl start apache2 \
+    && git pull \
     && tail -f /dev/null
