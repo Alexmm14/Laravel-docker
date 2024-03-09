@@ -21,17 +21,19 @@ Route::get('/', HomeController::class);
 
 #Grupo de rutas
 Route::controller(ProductController::class)->group(function(){
+    
+    #Pasar ruta con un argumento
+    #Si hay una ruta similar, osea que tenga el mismo nombre pero va a recibir un argumento. Primero debes colocar la ruta con el argumento
+    Route::get('/productView/{producto}', 'viewProduct');
+    
     Route::get('/productView', 'indexProducts');
 
     Route::get('/productCreate', 'crateProduct');
 
     Route::get('/productUpdate', 'updateProduct');
 
-    Route::get('/productDelete', 'delteProduct');
+    Route::get('/productDelete', 'deleteProduct');
 });
 
 
 
-#Pasar ruta con un argumento
-#Si hay una ruta similar, osea que tenga el mismo nombre pero va a recibir un argumento. Primero debes colocar la ruta con el argumento
-#Route::get('/productView/{argumento}', [ProductController::class, '']);

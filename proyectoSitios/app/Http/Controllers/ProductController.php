@@ -7,23 +7,21 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function indexProducts(){
-        return 'Ruta para mostrar los productos';
+        return view('product.indexProducts');
     }
     public function crateProduct(){
-        return 'Ruta para crear el producto';
+        return view('product.createProduct');
     } 
     public function updateProduct(){
-        return 'Ruta para actualizar el producto';
+        return view('product.updateProduct');
     }
-    public function delteProduct(){
-        return 'Ruta para eliminar un producto';
+    public function deleteProduct(){
+        return view('product.deleteProduct');
     }
     
-    /* 
-    public function viewProduct($argumento){
-        Se puede usar el argumento en la función
-        print($argumento);
-        return 'Ruta para eliminar un producto';
-    }*/
-
+    public function viewProduct($producto){
+        #Se puede usar el argumento en la función
+        #print($argumento);
+        return view('product.viewProduct', compact('producto'));
+    }
 }
