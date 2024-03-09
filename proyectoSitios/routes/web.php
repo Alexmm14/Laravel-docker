@@ -28,6 +28,3 @@ Route::get('/productDelete', [ProductController::class, 'delteProduct']);
 #Pasar ruta con un argumento
 #Si hay una ruta similar, osea que tenga el mismo nombre pero va a recibir un argumento. Primero debes colocar la ruta con el argumento
 #Route::get('/productView/{argumento}', [ProductController::class, '']);
-
-
-

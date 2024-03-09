@@ -18,6 +18,7 @@ class ProductController extends Controller
     public function delteProduct(){
         return 'Ruta para eliminar un producto';
     }
+    
     /* 
     public function viewProduct($argumento){
         Se puede usar el argumento en la función
