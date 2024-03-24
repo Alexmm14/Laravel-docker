@@ -22,7 +22,9 @@ Pasos para iniciar el proyecto:
 4- Te diriges a la carpeta donde clonaste el repositorio.
 
 5- En el archivo docker-compose.yml
-Debes de colocar la contraseña que le vas a poner a tu base de datos, despues en el archivo .env debes de colocar la misma contraseña donde se señala
+Debes de colocar la contraseña que le vas a poner a tu base de datos
+
+6-Diriguete a la carpeta del proyecto y duplica el archivo .env.example pero con el nombre de .env y coloca la constraseña que colocaste en paso anterios
 
 6- Ejecutas el siguente comando:
 
@@ -32,8 +34,15 @@ Debes de colocar la contraseña que le vas a poner a tu base de datos, despues e
 
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' laravel-container
 
+En teoria te tendría que dar la ip: 172.25.0.2
+Con esta IP se podrá visualizar el proyecto en tu navegador
 
 Listo, ahora puedes ir al navegador a visualizar si esta corriendo apache y laravel
 Ingresa la ip que te salio en el navegador
+
+
+
+
+Para editar los archivos de proyecto como crear nuevas rutas, editar migraciones. Abres la carpeta 'proyectoSitios' con tu IDE de preferencia:)
 
 
