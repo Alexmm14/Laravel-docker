@@ -9,6 +9,8 @@ services:
     networks:
       mi_red:
         ipv4_address: 172.25.0.2
+    volumes:
+      - ./proyectoSitios:/var/www/html/proyectoSitios  # Mapeo del directorio local proyectoSitios al directorio en el contenedor
 
   postgres-db:
     image: postgres
@@ -16,7 +18,7 @@ services:
     environment:
       POSTGRES_DB: laravel
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: #PontuContraseña'
+      POSTGRES_PASSWORD: "tuContraseña"
     networks:
       mi_red:
         ipv4_address: 172.25.0.3
@@ -27,4 +29,3 @@ networks:
     ipam:
       config:
         - subnet: 172.25.0.0/16
-
