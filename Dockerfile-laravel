@@ -20,9 +20,6 @@ RUN apt-get update \
     && service apache2 restart \
     && rm -rf /var/lib/apt/lists/*
 
-
-
-
 # Establece el directorio de trabajo
 WORKDIR /var/www/html/
 
@@ -42,7 +39,6 @@ RUN a2dissite 000-default.conf \
     
 # Expone el puerto 80 (o el puerto que necesites)
 EXPOSE 80
-
 
 # Comando para iniciar apache y que se mantenga abierto el contenedor
 CMD cd /var/www/html/proyectoSitios/ \
