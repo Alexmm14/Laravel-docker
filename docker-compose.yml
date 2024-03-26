@@ -10,7 +10,9 @@ services:
       mi_red:
         ipv4_address: 172.25.0.2
     volumes:
-      - ./proyectoSitios:/var/www/html/proyectoSitios  # Mapeo del directorio local proyectoSitios al directorio en el contenedor
+      - ./proyectoSitios:/var/www/html/proyectoSitios
+    ports:
+      - "80:80"  # Mapea el puerto 80 del contenedor al puerto 80 del host
 
   postgres-db:
     image: postgres
