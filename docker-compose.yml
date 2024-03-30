@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_DB: laravel
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "tuContraseña"
+      POSTGRES_PASSWORD: "Admin2024#"
     networks:
       mi_red:
         ipv4_address: 172.25.0.3

@@ -15,6 +15,7 @@ RUN apt-get update \
     && apt-get install -y systemctl \
     && apt-get install -y php-pgsql \
     && apt install -y php-curl \
+    && apt-get install -y curl \
     && a2enmod php8.1 \
     && apt-get clean \
     && service apache2 restart \
@@ -40,6 +41,9 @@ RUN a2dissite 000-default.conf \
 # Expone el puerto 80 (o el puerto que necesites)
 EXPOSE 80
 
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && \
+    apt-get install -y nodejs
+    
 # Comando para iniciar apache y que se mantenga abierto el contenedor
 CMD cd /var/www/html/proyectoSitios/ \
     && composer install \
