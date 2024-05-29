@@ -1,8 +1,16 @@
 <?php
 
+use App\Http\Controllers\courseController;
+use App\Http\Controllers\groupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\studentController;
+use App\Http\Controllers\teacherController;
+use App\Http\Controllers\userController;
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,23 +25,6 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', HomeController::class);
 
-
-
-#Grupo de rutas
-Route::controller(ProductController::class)->group(function(){
-    
-    #Pasar ruta con un argumento
-    #Si hay una ruta similar, osea que tenga el mismo nombre pero va a recibir un argumento. Primero debes colocar la ruta con el argumento
-    Route::get('/productView/{producto}', 'viewProduct');
-    
-    Route::get('/productView', 'indexProducts');
-
-    Route::get('/productCreate', 'crateProduct');
-
-    Route::get('/productUpdate', 'updateProduct');
-
-    Route::get('/productDelete', 'deleteProduct');
-});
 
 
 

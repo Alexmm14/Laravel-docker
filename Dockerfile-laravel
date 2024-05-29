@@ -6,17 +6,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Actualiza el sistema e instala las dependencias necesarias
 RUN apt-get update \
-    && apt-get install -y php \
+    && apt-get install -y php libapache2-mod-php \
     && apt-get install -y composer \
-    && apt-get install -y vim \
-    && apt-get install -y apache2 libapache2-mod-php \
-    && apt-get install -y php-xml \
-    && apt-get install -y git \ 
     && apt-get install -y systemctl \
-    && apt-get install -y php-pgsql \
+    && apt-get install -y vim \
+    && apt-get install -y apache2 \
+    && apt-get install -y php-xml \
+    && apt-get install -y git \
     && apt install -y php-curl \
-    && apt-get install -y curl \
-    && a2enmod php8.1 \
+    && apt-get install -y php-pgsql \
     && apt-get clean \
     && service apache2 restart \
     && rm -rf /var/lib/apt/lists/*
@@ -41,8 +39,9 @@ RUN a2dissite 000-default.conf \
 # Expone el puerto 80 (o el puerto que necesites)
 EXPOSE 80
 
-RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && \
-    apt-get install -y nodejs
+#Instalar nodejs para el modulo el login
+#RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && \
+#    apt-get install -y nodejs
     
 # Comando para iniciar apache y que se mantenga abierto el contenedor
 CMD cd /var/www/html/proyectoSitios/ \
