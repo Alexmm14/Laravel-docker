@@ -1,29 +1,22 @@
 <?php
 
-use App\Http\Controllers\courseController;
-use App\Http\Controllers\groupController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\studentController;
-use App\Http\Controllers\teacherController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\EnrollmentController;
 
+Route::resource('students', StudentController::class);
+Route::resource('teachers', TeacherController::class);
+Route::resource('courses', CourseController::class);
+Route::resource('groups', GroupController::class);
+Route::resource('users', UserController::class);
 
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', HomeController::class);
+Route::get('enrollment', [EnrollmentController::class, 'index']);
+Route::post('enrollment', [EnrollmentController::class, 'store']);
+Route::get('enrollment/show-courses', [EnrollmentController::class, 'showCourses'])->name('enrollment.showCourses');
 
 
 

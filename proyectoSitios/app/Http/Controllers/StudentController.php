@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Student;
 
 use Illuminate\Http\Request;
 
-class teacherController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $student = Student::all();
+        return view("Student.index", compact(""));
     }
 
     /**
@@ -19,7 +21,8 @@ class teacherController extends Controller
      */
     public function create()
     {
-        //
+        return view("Student.createStudent");
+
     }
 
     /**
@@ -27,7 +30,9 @@ class teacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = new Student();
+        $student -> name = $request['name'];
+        $student -> email = $request['email'];
     }
 
     /**
@@ -35,7 +40,7 @@ class teacherController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Student::findOrFail($id);
     }
 
     /**
@@ -43,7 +48,8 @@ class teacherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        return view("Student.editStudent", compact("student"));
     }
 
     /**
@@ -52,6 +58,9 @@ class teacherController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $studentRequest = request()->except(['_token', '_method']);
+        Student::where('id', '=', $id)->update($studentRequest);
+        return redirect()->route('student.index');
     }
 
     /**
@@ -59,6 +68,8 @@ class teacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $student->delete();
+        return redirect()->route('student.index')->with('success', 'Etiqueta eliminada correctamente');
     }
 }
