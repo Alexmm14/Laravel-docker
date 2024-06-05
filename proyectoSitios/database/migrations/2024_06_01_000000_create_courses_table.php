@@ -12,15 +12,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Primary key
             $table->string('title');
             $table->integer('credits');
             $table->timestamps();
         });
+
     }
 
 
-    /**
+
+    /**{}
      * Reverse the migrations.
      */
     public function down(): void

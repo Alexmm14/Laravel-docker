@@ -13,7 +13,7 @@ class StudentController extends Controller
     public function index()
     {
         $student = Student::all();
-        return view("Student.index", compact(""));
+        return view("Student.index", compact("student"));
     }
 
     /**
@@ -33,6 +33,8 @@ class StudentController extends Controller
         $student = new Student();
         $student -> name = $request['name'];
         $student -> email = $request['email'];
+        $student -> save();
+        return redirect()->route('student.index');
     }
 
     /**

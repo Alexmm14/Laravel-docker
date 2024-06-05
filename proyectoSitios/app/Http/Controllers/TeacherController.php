@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -11,7 +12,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::all();
+        return view('teachers.index', compact('teachers'));
     }
 
     /**
@@ -19,7 +21,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('teachers.createTeacher');
     }
 
     /**
@@ -27,7 +29,13 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teacher = new Teacher();
+        $teacher->name = $request->input('name');
+        $teacher->email = $request->input('email');
+        $teacher->subject = $request->input('subject');
+        $teacher->save();
+
+        return redirect()->route('teachers.index');
     }
 
     /**
@@ -36,6 +44,7 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         //
+        return Teacher::findOrfail($id);
     }
 
     /**
@@ -44,6 +53,8 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         //
+        $teacher = Teacher::findOrfail($id);
+        return view('teachers.edit', compact('teacher'));
     }
 
     /**
@@ -52,6 +63,9 @@ class TeacherController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $teacherRequest = request()->except('_token', '_method');
+        Teacher::where('id', '=', $id)->update($teacherRequest);
+        return redirect()->route('teachers.index');
     }
 
     /**
@@ -60,5 +74,8 @@ class TeacherController extends Controller
     public function destroy(string $id)
     {
         //
+        $teacher = Teacher::findOrfail($id);
+        $teacher->delete();
+        return redirect()->route('teachers.index');
     }
 }
