@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'credits',
+    ];
+
     public function teachers()
     {
         return $this->belongsToMany(Teacher::class, 'course_teacher');
@@ -17,4 +24,3 @@ class Course extends Model
         return $this->hasMany(Group::class);
     }
 }
-

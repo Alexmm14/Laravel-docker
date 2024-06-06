@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Course;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $course = Course::all();
+        return view("Course.index", compact("course"))
     }
 
     /**
@@ -19,7 +21,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view("Course.createCourse");
+
     }
 
     /**
@@ -27,7 +30,11 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = new Course();
+        $course -> title = $request['title'];
+        $course -> credits = $request['credits']; 
+        $course -> save();
+        return redirect()->route('course.index')
     }
 
     /**
@@ -35,7 +42,7 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Course::findOrFail($id);
     }
 
     /**
@@ -43,7 +50,8 @@ class CourseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $course = Course::findOrFail($id);
+        return view("Course.editCourse", compact("course"));
     }
 
     /**
@@ -51,14 +59,19 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        $courseRequest = request()->except(['_token', '_method']);
+        Student::where('id', '=', $id)->update($courseRequest);
+        return redirect()->route('course.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Course $course)
     {
-        //
+        $course = Course::findOrFail($id);
+        $course->delete();
+        return redirect()->route('course.index')->with('success', 'Etiqueta eliminada correctamente');
     }
 }
