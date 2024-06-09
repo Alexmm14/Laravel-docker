@@ -9,21 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('UserCourse', function (Blueprint $table) {
             $table->id();
-            $table->integer('max_students')->default(15);
+            $table->unsignedBigInteger('userId');
+            $table->unsignedBigInteger('courseId');
+            $table->foreign('userId')->references('id')->on('users');
+            $table->foreign('courseId')->references('id')->on('courses');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('UsuarioCurso');
     }
 };
