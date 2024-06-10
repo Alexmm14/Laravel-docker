@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('UserCourse', function (Blueprint $table) {
+        Schema::create('UserGroup', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userId');
-            $table->unsignedBigInteger('courseId');
+            $table->unsignedBigInteger('groupId');
             $table->foreign('userId')->references('id')->on('users');
-            $table->foreign('courseId')->references('id')->on('courses');
+            $table->foreign('groupId')->references('id')->on('groups');
             $table->timestamps();
         });
     }

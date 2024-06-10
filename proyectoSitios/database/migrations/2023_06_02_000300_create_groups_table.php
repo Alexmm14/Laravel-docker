@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
+            $table->integer('group')->unique();
             $table->integer('max_students')->default(15);
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

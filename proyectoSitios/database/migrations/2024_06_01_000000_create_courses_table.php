@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id(); // Primary key
             $table->string('title');
             $table->integer('credits');
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
 
