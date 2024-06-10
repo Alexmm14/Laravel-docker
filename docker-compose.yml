@@ -16,7 +16,7 @@ services:
 
   postgres-db:
     image: postgres
-    container_name: postgres-container
+    container_name: postgres-containerl
     environment:
       POSTGRES_DB: laravel
       POSTGRES_USER: postgres

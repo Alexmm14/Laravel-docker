@@ -9,26 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->unsignedBigInteger('course_id'); // Foreign key
-            $table->integer('max_students')->default(15);
-            $table->timestamps();
-
-            // Foreign key constraint
+        Schema::create('CourseGroup', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('group_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->timestamps();
         });
-
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('CursoGrupo');
     }
 };

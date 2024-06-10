@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->string('name');
-            $table->string('email')->unique();
+        Schema::create('groups', function (Blueprint $table) {
+            $table->id();
+            $table->integer('group')->unique();
+            $table->integer('max_students')->default(15);
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
-
     }
 
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('groups');
     }
 };
