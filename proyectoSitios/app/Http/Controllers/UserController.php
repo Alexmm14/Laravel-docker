@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class UserController extends Controller
 {
     /**
@@ -83,4 +84,11 @@ class UserController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function showUserGroups($userId)
+    {
+        $user = User::findOrFail($userId);
+        return view('users.index', ['user' => $user]);
+    }
+
 }
