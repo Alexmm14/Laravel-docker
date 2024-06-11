@@ -60,14 +60,14 @@
                                         <a class="dropdown-item" href="{{ url('courses') }}">Cursos</a>
                                         <a href="{{url('groups')}}" class="dropdown-item">Grupos</a>
                                         @if(Auth::user()->type_user_id == 1)
-                                            <a href="{{ url('groups') }}" class="dropdown-item">Grupos Inscritos</a>
+                                            <a href="{{ url('student-groups') }}" class="dropdown-item">Grupos Inscritos</a>
                                         @endif
                                         @if(Auth::user()->type_user_id == 2)
-                                            <a href="{{ url('groups') }}" class="dropdown-item">Cursos Inscritos</a>
+                                            <a href="{{ url('teacher-courses') }}" class="dropdown-item">Cursos Inscritos</a>
                                         @endif
                                         @if(Auth::user()->type_user_id == 3)
-                                            <a href="{{url('groups')}}" class="dropdown-item">Usuarios Profesores</a>
-                                            <a href="{{url('groups')}}" class="dropdown-item">Usuarios Alumnos</a>
+                                            <a href="{{url('teachers')}}" class="dropdown-item">Usuarios Profesores</a>
+                                            <a href="{{url('students')}}" class="dropdown-item">Usuarios Alumnos</a>
                                         @endif
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

@@ -54,4 +54,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Group::class, 'UserGroup', 'userId', 'groupId');
     }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'teacher_id');
+    }
+
 }

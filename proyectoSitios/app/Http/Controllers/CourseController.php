@@ -64,20 +64,18 @@ class CourseController extends Controller
     }
 
 
-    public function getTeacherCourses($userId)
+    public function showTeacherCourses()
     {
-        // Obtener el usuario y asegurarse de que es un Alumno
-        $user = User::where('id', $userId)->whereHas('typeUser', function ($query) {
-            $query->where('name', 'Profesor');
-        })->first();
-
-        // Verificar si el usuario es un alumno y existe
-        if ($user) {
-            // Obtener los cursos del usuario a través de los grupos
-            $courses = Course::where('teacher_id', $userId)->get();
-            return response()->json($courses);
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+    
+        // Verificar si el usuario es un profesor
+        if ($user && $user->type_user_id == 2) {
+            // Obtener los grupos del usuario
+            $courses = $user->courses;
+            return view('course.showCourses', compact('courses'));
         } else {
-            return response()->json(['message' => 'Usuario no encontrado o no es un profesor'], 404);
+            return view('course.showCourses', ['message' => 'Usuario no encontrado o no es un profesor']);
         }
     }
 

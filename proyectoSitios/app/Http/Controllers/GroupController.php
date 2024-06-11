@@ -133,20 +133,18 @@ class GroupController extends Controller
     }
 
 
-    public function getStudentGroups($userId)
+    public function showStudentGroups()
     {
-        // Obtener el usuario y asegurarse de que es un Alumno
-        $user = User::where('id', $userId)->whereHas('typeUser', function ($query) {
-            $query->where('name', 'Alumno');
-        })->first();
-
-        // Verificar si el usuario es un alumno y existe
-        if ($user) {
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+    
+        // Verificar si el usuario es un alumno
+        if ($user && $user->type_user_id == 1) {
             // Obtener los grupos del usuario
             $groups = $user->groups;
-            return response()->json($groups);
+            return view('group.showGroup', compact('groups'));
         } else {
-            return response()->json(['message' => 'Usuario no encontrado o no es un alumno'], 404);
+            return view('group.showGroup', ['message' => 'Usuario no encontrado o no es un alumno']);
         }
     }
 

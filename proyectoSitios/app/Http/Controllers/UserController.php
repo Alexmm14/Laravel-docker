@@ -103,7 +103,7 @@ class UserController extends Controller
             $query->where('name', 'Profesor');
         })->get();
 
-        return response()->json($teachers);
+        return view('users.teachers', compact('teachers'));
     }
 
     public function getStudents()
@@ -118,7 +118,7 @@ class UserController extends Controller
             $query->where('name', 'Alumno');
         })->get();
 
-        return response()->json($students);
+        return view('users.students', compact('students'));
     }
 
 }
