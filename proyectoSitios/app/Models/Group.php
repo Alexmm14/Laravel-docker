@@ -2,19 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    public function course()
+    protected $fillable = [
+        'group',
+        'max_students',
+    ];
+    public function courses()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsToMany(Course::class, 'CourseGroup', 'group_id', 'course_id');
     }
-
-    public function students()
+    public function users()
     {
-        return $this->belongsToMany(Student::class, 'group_student');
+        return $this->belongsToMany(User::class, 'UserGroup', 'groupId', 'userId');
     }
 }
 

@@ -18,15 +18,14 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::resource('/courses', CourseController::class);
 Route::resource('/groups', GroupController::class);
 Route::resource('/users', UserController::class);
-
-Route::get('enrollment', [EnrollmentController::class, 'index']);
-Route::post('enrollment', [EnrollmentController::class, 'store']);
-Route::get('enrollment/show-courses', [EnrollmentController::class, 'showCourses'])->name('enrollment.showCourses');
-
-
-
-
+Route::post('/groups/{groupId}/enroll', [GroupController::class, 'enroll'])->name('groups.enroll');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/student/{userId}/groups', [GroupController::class, 'getStudentGroups'])->name('groups.getStudentGroups');
+Route::get('/teacher/{userId}/courses', [CourseController::class, 'getTeacherCourses'])->name('groups.getTeacherCourses');
+
+Route::get('/student', [UserController::class, 'getStudents']);
+Route::get('/teacher', [UserController::class, 'getTeachers']);

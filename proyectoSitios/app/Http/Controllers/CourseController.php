@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -24,11 +25,20 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->type_user_id;
-        echo $user;
+        #ver si es alumno profesor o administrador
 
         $course = Course::all();
-        return view("course.index", compact("course"));
+        $auth = Auth::user();
+        if ($auth->type_user_id == 2){
+            $teacherId = Auth::user()->id;
+            return view("course.index", compact("course", "auth", 'teacherId'));
+        }if ($auth->type_user_id == 1) {
+            return view("course.index", compact("course", "auth"));
+        } else {
+            return view("course.index", compact("course", "auth"));
+        }
+
+
     }
 
     /**
@@ -53,6 +63,25 @@ class CourseController extends Controller
         return redirect()->route('courses.index');
     }
 
+
+    public function getTeacherCourses($userId)
+    {
+        // Obtener el usuario y asegurarse de que es un Alumno
+        $user = User::where('id', $userId)->whereHas('typeUser', function ($query) {
+            $query->where('name', 'Profesor');
+        })->first();
+
+        // Verificar si el usuario es un alumno y existe
+        if ($user) {
+            // Obtener los cursos del usuario a través de los grupos
+            $courses = Course::where('teacher_id', $userId)->get();
+            return response()->json($courses);
+        } else {
+            return response()->json(['message' => 'Usuario no encontrado o no es un profesor'], 404);
+        }
+    }
+
+
     /**
      * Display the specified resource.
      */
@@ -76,8 +105,11 @@ class CourseController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $courseRequest = request()->except(['_token', '_method']);
+        $courseRequest = request()->except(['_token', '_method', 'countIns']);
         Course::where('id', '=', $id)->update($courseRequest);
+        if ($request->has('countIns')) {
+            User::where('id', '=', Auth::user()->id)->update(['countIns' => $request->input('countIns')]);
+        }
         return redirect()->route('courses.index');
     }
 
@@ -90,4 +122,5 @@ class CourseController extends Controller
         $course->delete();
         return redirect()->route('courses.index')->with('success', 'Etiqueta eliminada correctamente');
     }
+
 }

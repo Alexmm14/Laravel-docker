@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -83,4 +84,41 @@ class UserController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function showUserGroups($userId)
+    {
+        $user = User::findOrFail($userId);
+        return view('users.index', ['user' => $user]);
+    }
+
+    public function getTeachers()
+    {
+        // Verificar si el usuario autenticado es admin
+        if (Auth::user()->typeUser->name !== 'Admin') {
+            return response()->json(['message' => 'No autorizado'], 403);
+        }
+
+        // Obtener todos los usuarios de tipo "Profesor"
+        $teachers = User::whereHas('typeUser', function ($query) {
+            $query->where('name', 'Profesor');
+        })->get();
+
+        return response()->json($teachers);
+    }
+
+    public function getStudents()
+    {
+        // Verificar si el usuario autenticado es admin
+        if (Auth::user()->typeUser->name !== 'Admin') {
+            return response()->json(['message' => 'No autorizado'], 403);
+        }
+
+        // Obtener todos los usuarios de tipo "Alumno"
+        $students = User::whereHas('typeUser', function ($query) {
+            $query->where('name', 'Alumno');
+        })->get();
+
+        return response()->json($students);
+    }
+
 }

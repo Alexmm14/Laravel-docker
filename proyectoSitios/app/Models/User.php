@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type_user_id', // Agregar type_user_id al array fillable
+        'countIns',
     ];
 
     /**
@@ -48,5 +49,9 @@ class User extends Authenticatable
     public function typeUser()
     {
         return $this->belongsTo(TypeUser::class);
+    }
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'UserGroup', 'userId', 'groupId');
     }
 }

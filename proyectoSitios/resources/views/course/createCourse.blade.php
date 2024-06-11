@@ -1,4 +1,4 @@
-@extends('template.templateBase')
+@extends('layouts.app')
 @section('title', 'Cursos')
 
 @section('content')
