@@ -26,3 +26,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/student/{userId}/groups', [GroupController::class, 'getStudentGroups'])->name('groups.getStudentGroups');
 Route::get('/teacher/{userId}/courses', [CourseController::class, 'getTeacherCourses'])->name('groups.getTeacherCourses');
+
+Route::get('/student', [UserController::class, 'getStudents']);
+Route::get('/teacher', [UserController::class, 'getTeachers']);
