@@ -29,3 +29,6 @@ Route::get('/teacher/{userId}/courses', [CourseController::class, 'getTeacherCou
 
 Route::get('/student', [UserController::class, 'getStudents']);
 Route::get('/teacher', [UserController::class, 'getTeachers']);
+
+Route::get('/groupsAlumnos', [GroupController::class, 'listGroupsAlumnos'])->name('groups.alumnos');
+Route::get('/courses-profesores', [CourseController::class, 'getTeacherCourses'])->name('courses.profesores');

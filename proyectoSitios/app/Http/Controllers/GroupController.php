@@ -161,4 +161,12 @@ class GroupController extends Controller
         $group->delete();
         return redirect()->route('groups.index')->with('success', 'Grupo eliminado correctamente');
     }
+
+    public function listGroupsAlumnos()
+    {
+        $groups = Group::with(['courses', 'users'])->get();
+        return view('group.groupsAlumnos', compact('groups'));
+    }
+
+
 }
