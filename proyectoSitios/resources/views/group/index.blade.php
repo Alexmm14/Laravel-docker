@@ -41,7 +41,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            @endif
+                        @endif
                         <h2 class="card-title text-center">{{ $group->group }}</h2>
                         <div class="card-text col-12">
                             <h3>Cursos:</h3>

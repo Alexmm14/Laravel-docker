@@ -63,6 +63,25 @@ class CourseController extends Controller
         return redirect()->route('courses.index');
     }
 
+
+    public function getTeacherCourses($userId)
+    {
+        // Obtener el usuario y asegurarse de que es un Profesor
+        $user = User::where('id', $userId)->whereHas('typeUser', function ($query) {
+            $query->where('name', 'Profesor');
+        })->first();
+
+        // Verificar si el usuario es un profesor y existe
+        if ($user) {
+            // Obtener los cursos del usuario
+            $courses = $user->courses;
+            return response()->json($courses);
+        } else {
+            return response()->json(['message' => 'Usuario no encontrado o no es un profesor'], 404);
+        }
+    }
+    
+
     /**
      * Display the specified resource.
      */

@@ -121,16 +121,34 @@ class GroupController extends Controller
     }
 
     public function enrolledCourses()
-{
-    // Obtener el usuario autenticado
-    $user = auth()->user();
+    {
+        // Obtener el usuario autenticado
+        $user = auth()->user();
 
-    // Obtener los grupos en los que el usuario está inscrito
-    $enrolledGroups = $user->groups;
+        // Obtener los grupos en los que el usuario está inscrito
+        $enrolledGroups = $user->groups;
 
-    // Cargar la vista y pasar los grupos inscritos por el usuario
-    return view('users.index', compact('enrolledGroups'));
-}
+        // Cargar la vista y pasar los grupos inscritos por el usuario
+        return view('users.index', compact('enrolledGroups'));
+    }
+
+
+    public function getStudentGroups($userId)
+    {
+        // Obtener el usuario y asegurarse de que es un Alumno
+        $user = User::where('id', $userId)->whereHas('typeUser', function ($query) {
+            $query->where('name', 'Alumno');
+        })->first();
+
+        // Verificar si el usuario es un alumno y existe
+        if ($user) {
+            // Obtener los grupos del usuario
+            $groups = $user->groups;
+            return response()->json($groups);
+        } else {
+            return response()->json(['message' => 'Usuario no encontrado o no es un alumno'], 404);
+        }
+    }
 
 
     /**

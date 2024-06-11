@@ -23,3 +23,6 @@ Route::post('/groups/{groupId}/enroll', [GroupController::class, 'enroll'])->nam
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/student/{userId}/groups', [GroupController::class, 'getStudentGroups'])->name('groups.getStudentGroups');
+Route::get('/teacher/{userId}/courses', [CourseController::class, 'getTeacherCourses'])->name('groups.getTeacherCourses');
